@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+body, #root, .App {
+  direction: rtl;
+  font-family: 'Arial', 'Helvetica', sans-serif;
+}
+
+.leaflet-container {
+  min-height: 60vh;
+  width: 100%;
+}
