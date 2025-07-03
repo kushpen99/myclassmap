@@ -1,11 +1,21 @@
 import React, { useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Tooltip } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 // Unique icon for the school
 const schoolIcon = new L.Icon({
   iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+  shadowSize: [41, 41]
+});
+
+// Unique icon for students (blue)
+const studentIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
   iconSize: [25, 41],
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
@@ -58,7 +68,8 @@ function App() {
           </Popup>
         </Marker>
         {students.map((student, idx) => (
-          <Marker key={idx} position={[student.lat, student.lon]}>
+          <Marker key={idx} position={[student.lat, student.lon]} icon={studentIcon}>
+            <Tooltip direction="top" offset={[0, -20]}>{student.name}</Tooltip>
             <Popup>
               <b>{student.name}</b><br />
               {student.address}
